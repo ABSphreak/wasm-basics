@@ -1,0 +1,9 @@
+{
+  "name": "wasm-basics",
+  "version": "1.0.0",
+  "description": "WASM basics",
+  "main": "server.js",
+  "repository": "https://github.com/ABSphreak/wasm-basics.git",
+  "author": "ABSphreak <absphreak@outlook.com>",
+  "license": "MIT"
+}
