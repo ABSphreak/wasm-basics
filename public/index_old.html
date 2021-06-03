@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>WebAssembly Demo</title>
+	</head>
+	<body>
+		<h1>WebAssembly Demo</h1>
+		<script>
+			// Initialise WASM with custom memory (array buffer)
+			const wasmMemory = new WebAssembly.Memory({ initial: 2 });
+
+			// Read a string out of WebAssembly Memory
+			const readMemStr = (offset, length) => {
+				const strBuffer = new Uint8Array(wasmMemory.buffer, offset, length);
+				const str = new TextDecoder().decode(strBuffer);
+
+				// Notify and make use of new String
+				window.dispatchEvent(new CustomEvent('wasmValue', { detail: str }));
+			};
+
+			// Listen for new WASM strings
+			window.addEventListener('wasmValue', str => {
+				console.log('Received a string from C: ', str.detail);
+			});
+
+			// Imports object
+			const imports = {
+				env: {
+					numLog: console.log,
+					strLog: readMemStr,
+					memory: wasmMemory,
+				},
+			};
+
+			// Load WASM
+			WebAssembly.instantiateStreaming(fetch('/program.wasm'), imports).then(wasm => {
+				console.log('WASM ready.');
+
+				// Make the WASM object accessible
+				window.wasm = wasm;
+
+				// Log out all exported functions
+				// console.log(WebAssembly.Module.exports(wasm.module));
+
+				// Log out all imported functions
+				console.log(WebAssembly.Module.imports(wasm.module));
+
+				// Run an exported function from WASM
+				// console.log(wasm.instance.exports.getDoubleNumber(144324));
+
+				// Run the function only from WASM
+				wasm.instance.exports.getDoubleNumber(7969874);
+			});
+		</script>
+	</body>
+</html>

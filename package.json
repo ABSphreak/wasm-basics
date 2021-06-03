@@ -7,6 +7,9 @@
 	"author": "ABSphreak <absphreak@outlook.com>",
 	"type": "module",
 	"license": "MIT",
+	"scripts": {
+		"start": "node server.js"
+	},
 	"dependencies": {
 		"express": "^4.17.1"
 	}

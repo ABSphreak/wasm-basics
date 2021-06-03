@@ -8,8 +8,10 @@
 	</head>
 	<body>
 		<h1>WebAssembly Demo</h1>
+		<script src="demo.js"></script>
 		<script>
-			// WASM code
+			// Wrap C _greet as a JS function
+			const greet = cwrap('greet', 'string', ['string']);
 		</script>
 	</body>
 </html>
