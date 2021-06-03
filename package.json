@@ -1,9 +1,13 @@
 {
-  "name": "wasm-basics",
-  "version": "1.0.0",
-  "description": "WASM basics",
-  "main": "server.js",
-  "repository": "https://github.com/ABSphreak/wasm-basics.git",
-  "author": "ABSphreak <absphreak@outlook.com>",
-  "license": "MIT"
+	"name": "wasm-basics",
+	"version": "1.0.0",
+	"description": "WASM basics",
+	"main": "server.js",
+	"repository": "https://github.com/ABSphreak/wasm-basics.git",
+	"author": "ABSphreak <absphreak@outlook.com>",
+	"type": "module",
+	"license": "MIT",
+	"dependencies": {
+		"express": "^4.17.1"
+	}
 }
